@@ -43,6 +43,11 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
 
+    # machina forum dependencies
+    'mptt',
+    'haystack',
+    'widget_tweaks',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,10 +58,26 @@ INSTALLED_APPS = [
     # Menus
     'wagtailmenus',
 
+    # machina forum
+
+    'machina',
+    'machina.apps.forum',
+    'machina.apps.forum_conversation',
+    'machina.apps.forum_conversation.forum_attachments',
+    'machina.apps.forum_conversation.forum_polls',
+    'machina.apps.forum_feeds',
+    'machina.apps.forum_moderation',
+    'machina.apps.forum_search',
+    'machina.apps.forum_tracking',
+    'machina.apps.forum_member',
+    'machina.apps.forum_permission',
+
     # Design / CSS
     'sass_processor',
     'compressor',
 ]
+
+# AUTH_USER_MODEL = "users.User"
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -69,15 +90,21 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
+    # Machina
+    'machina.apps.forum_permission.middleware.ForumPermissionMiddleware',
 ]
 
 ROOT_URLCONF = 'hts.urls'
+
+from machina import MACHINA_MAIN_TEMPLATE_DIR
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(PROJECT_DIR, 'templates'),
+            MACHINA_MAIN_TEMPLATE_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -91,8 +118,17 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 'wagtail.contrib.settings.context_processors.settings',
+
+                # menus
                 'wagtailmenus.context_processors.wagtailmenus',
+
+                # Machina
+                'machina.core.context_processors.metadata',
             ],
+            # 'loaders': [
+            #     'django.template.loaders.filesystem.Loader',
+            #     'django.template.loaders.app_directories.Loader',
+            # ]
         },
     },
 ]
@@ -109,7 +145,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -133,7 +168,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de-de'
 
 TIME_ZONE = 'UTC'
 
@@ -157,10 +192,32 @@ COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
+from machina import MACHINA_MAIN_STATIC_DIR
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
+    MACHINA_MAIN_STATIC_DIR,
 ]
+
+# MACHINA REQUIRED
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    },
+    'machina_attachments': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/tmp',
+    },
+}
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
+
+MACHINA_FORUM_NAME = "Community"
+MACHINA_BASE_TEMPLATE_NAME = "community/board_base.html"
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
 # Javascript / CSS assets being served from cache (e.g. after a Wagtail upgrade).
