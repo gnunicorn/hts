@@ -23,6 +23,7 @@
         {% compress css %}
         <link type="text/x-scss" href="{% static 'main.scss' %}" rel="stylesheet" media="screen">
         {% endcompress %}
+        
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -30,39 +31,8 @@
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" rel="author" href="{% slugurl 'home' %}">{% if site_name %}- {{ site_name }}{% endif %}</a>
-          
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                {% main_menu %}
-                <!-- <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% slugurl 'home' %}">Handbuch</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% slugurl 'home' %}">Community</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% slugurl 'home' %}">Über</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{% slugurl 'home' %}">Impressum</a>
-                    </li>
-                  <li class="nav-item">
-                    <a class="btn btn-outline-primary" href="/">Mitmachen</a>
-                  </li> -->
-                </ul>
-              </div>
-            </div>
-          </nav>
-
+        {% include "menus/top_navbar.html" %}
+        
         <div class="py-5">
             {% block inner %}{% endblock %}
         </div>
@@ -101,6 +71,7 @@
         <script type="text/javascript" src="{% static 'js/bootstrap/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 
+        <script src="{% static 'misago/js/misago.js' %}"></script>
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}

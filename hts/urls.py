@@ -2,13 +2,24 @@ from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from django.utils import timezone
+from django.views.decorators.cache import cache_page
+from django.views.decorators.http import last_modified
+from django.views.i18n import JavaScriptCatalog
+
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from machina import urls as machina_urls
-
 from search import views as search_views
+
+
+
+from misago.users.forms.auth import AdminAuthenticationForm
+
+
+admin.autodiscover()
+admin.site.login_form = AdminAuthenticationForm
 
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
@@ -16,9 +27,22 @@ urlpatterns = [
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search'),
-    url(r'^community/', include(machina_urls)),
+    # Javascript translations
+    url(
+        r"^django-i18n.js$",
+        last_modified(lambda req, **kw: timezone.now())(
+            cache_page(86400 * 2, key_prefix="misagojsi18n")(
+                JavaScriptCatalog.as_view(packages=["misago"])
+            )
+        ),
+        name="django-i18n",
+    ),
 
+    url(r'^search/$', search_views.search, name='search'),
+    url(r'^community/', include("misago.urls", namespace="misago")),
+
+    # django-simple-sso doesn't have namespaces, we can't use namespace here
+    url(r"^sso/", include("misago.sso.urls")),
 ]
 
 
