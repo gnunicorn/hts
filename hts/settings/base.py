@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'modelcluster',
     'taggit',
+    'django_extensions',
 
     # machina forum dependencies
     'mptt',
