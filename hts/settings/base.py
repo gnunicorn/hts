@@ -41,8 +41,8 @@ INSTALLED_APPS = INSTALLED_PLUGINS + [
     "misago.users",
 
     # our pages
-    'home',
-    'search',
+    'hts.base',
+    'hts.search',
 
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
@@ -70,7 +70,7 @@ INSTALLED_APPS = INSTALLED_PLUGINS + [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-       # 3rd party apps used by Misago
+    # 3rd party apps used by Misago
     "ariadne.contrib.django",
     "celery",
     "debug_toolbar",
@@ -298,6 +298,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# INTERNAL_IPS = [
+#     '127.0.0.1',
+# ]
 
 # Caching
 # https://docs.djangoproject.com/en/1.11/topics/cache/#setting-up-the-cache
@@ -308,8 +311,6 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
     }
 }
-
-MISAGO_SEARCH_CONFIG
 
 
 # Static files (CSS, JavaScript, Images)
