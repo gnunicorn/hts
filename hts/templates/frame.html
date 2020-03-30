@@ -1,5 +1,6 @@
 {% load static wagtailuserbar wagtailcore_tags menu_tags %}
 {% load compress %}
+{% load bootstrap4 %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -32,6 +33,9 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% include "menus/top_navbar.html" %}
+        
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
         
         <div class="py-5">
             {% block inner %}{% endblock %}

@@ -48,20 +48,16 @@ class BlockQuote(StructBlock):
         icon = "fa-quote-left"
         template = "blocks/blockquote.html"
 
-
-# StreamBlocks
-class BaseStreamBlock(StreamBlock):
-    """
-    Define the custom blocks that `StreamField` will utilize
-    """
-    heading_block = HeadingBlock()
-    paragraph_block = RichTextBlock(
-        icon="fa-paragraph",
-        template="blocks/paragraph_block.html"
-    )
-    image_block = ImageBlock()
-    block_quote = BlockQuote()
-    embed_block = EmbedBlock(
+DEFAULT_BLOCKS = [
+    ("heading_block", HeadingBlock()),
+    ("paragraph_block", RichTextBlock(
+            icon="fa-paragraph",
+            template="blocks/paragraph_block.html"
+        )),
+    ("image_block", ImageBlock()),
+    ("block_quote", BlockQuote()),
+    ("embed_block", EmbedBlock(
         help_text='Insert an embed URL e.g https://www.youtube.com/embed/SGJFWirQ3ks',
         icon="fa-s15",
-        template="blocks/embed_block.html")
+        template="blocks/embed_block.html")),
+]
