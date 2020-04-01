@@ -13,8 +13,8 @@ from wagtail.admin.edit_handlers import (
     PageChooserPanel,
     StreamFieldPanel,
 )
-from jetstream.fields import FeatureCustomizedStreamField
-from wagtail.core.fields import RichTextField
+
+from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Collection, Page, Orderable
 from wagtail.documents.models import Document
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
@@ -30,7 +30,7 @@ from taggit.models import TaggedItemBase
 
 from misago.users.models import User
 
-from .blocks import DEFAULT_BLOCKS
+from ..blocks import DEFAULT_BLOCKS
 
 
 class Author(Page):
@@ -50,7 +50,7 @@ class ArticleTag(TaggedItemBase):
 
 class RegularPage(Page):
 
-    content = FeatureCustomizedStreamField(
+    content = StreamField(
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
     )
     content_panels = Page.content_panels + [
@@ -67,7 +67,7 @@ class Article(Page):
 
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
 
-    content = FeatureCustomizedStreamField(
+    content = StreamField(
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
     )
     content_panels = Page.content_panels + [
