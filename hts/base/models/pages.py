@@ -14,6 +14,8 @@ from wagtail.admin.edit_handlers import (
     StreamFieldPanel,
 )
 
+from instance_selector.edit_handlers import InstanceSelectorPanel
+
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Collection, Page, Orderable
 from wagtail.documents.models import Document
@@ -66,6 +68,7 @@ class Article(Page):
     """
 
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
+    related_discussion = models.ForeignKey("misago_threads.Thread", null=True, on_delete=models.SET_NULL)
 
     content = StreamField(
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
@@ -76,5 +79,5 @@ class Article(Page):
         InlinePanel(
             'authors', label="Author(s)",
             panels=None, min_num=1),
+        InstanceSelectorPanel("related_discussion"),
     ]
-

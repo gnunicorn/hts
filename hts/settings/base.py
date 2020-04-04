@@ -61,6 +61,7 @@ INSTALLED_APPS = INSTALLED_PLUGINS + [
     'taggit',
     'django_extensions',
     'bootstrap4',
+    'instance_selector',
 
     "django.contrib.admin",
     "django.contrib.auth",
