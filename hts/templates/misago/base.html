@@ -37,7 +37,7 @@
 
       {# Global stylesheets #}
       {% compress css %}
-      <link type="text/x-scss" href="{% static 'main.scss' %}" rel="stylesheet" media="screen">
+      <link type="text/x-scss" href="{% static 'base.scss' %}" rel="stylesheet" media="screen">
       {% endcompress %}
       
       {% if theme.include_defaults %}
@@ -46,6 +46,11 @@
       {% for css_url in theme.styles %}
         <link href="{{ css_url }}" rel="stylesheet">
       {% endfor %}
+
+      {% compress css %}
+      <link type="text/x-scss" href="{% static 'custom.scss' %}" rel="stylesheet" media="screen">
+      {% endcompress %}
+
       {% if icons.apple_touch_icon %}
         <link rel="apple-touch-icon" sizes="180x180" href="{{ icons.apple_touch_icon }}" />
       {% else %}

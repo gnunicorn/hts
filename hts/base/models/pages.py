@@ -30,7 +30,11 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
+from django.utils.functional import cached_property
+
 from misago.users.models import User
+from misago.threads.models.post import Post
+from misago.readtracker.poststracker import make_read
 
 from ..blocks import DEFAULT_BLOCKS
 
@@ -81,3 +85,19 @@ class Article(Page):
             panels=None, min_num=1),
         InstanceSelectorPanel("related_discussion"),
     ]
+
+    @cached_property
+    def comments(self):
+        comments = self.discussions_query().order_by('likes')[:5]
+        make_read(comments)
+        return comments
+        
+    def discussions_query(self):
+        return Post.objects.filter(
+            models.Q(
+                thread=self.related_discussion,
+                is_hidden=False,
+                is_event=False,
+                is_unapproved=False)
+            & ~models.Q(thread__first_post=models.F("id"))
+            )

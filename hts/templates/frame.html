@@ -22,9 +22,14 @@
 
         {# Global stylesheets #}
         {% compress css %}
-        <link type="text/x-scss" href="{% static 'main.scss' %}" rel="stylesheet" media="screen">
+        <link type="text/x-scss" href="{% static 'base.scss' %}" rel="stylesheet" media="screen">
         {% endcompress %}
+        <link href="{% static 'misago/css/misago.css' %}" rel="stylesheet">
         
+        {% compress css %}
+        <link type="text/x-scss" href="{% static 'custom.scss' %}" rel="stylesheet" media="screen">
+        {% endcompress %}
+
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -37,9 +42,7 @@
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
         
-        <div class="py-5">
-            {% block inner %}{% endblock %}
-        </div>
+        {% block inner %}{% endblock %}
 
         <footer>
             <section class="py-5 bg-primary">
