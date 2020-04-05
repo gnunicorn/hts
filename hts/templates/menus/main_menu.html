@@ -8,5 +8,12 @@
             {% endif %}
         </li>       
     {% endfor %}
-    <li class="nav-item"><div id="user-menu-mount"></div></li>
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            <li class="nav-item"><a class="btn btn-secondary" href="/admin"><i class="material-icon">home_work</i></i></a></li>
+        {% endif %}
+        <li class="nav-item"><div id="user-menu-mount"></div></li>
+    {% else %}
+        <li class="nav-item"><a class="btn btn-primary" href="/mitmachen">Mitmachen</a></li>
+    {% endif %}
 </ul>

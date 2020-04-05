@@ -1,0 +1,19 @@
+.nav.nav-user {
+    display:: flex;
+    align-items: center;
+    height: 1em;
+  }
+  .nav.nav-user li a {
+    line-height: 20px;
+    padding: 10px 0.5em;
+  }
+  .nav.nav-user  .user-avatar {
+    height: 2em;
+    width: 2em;
+  }
+
+  .navbar-expand-lg .nav.nav-user .dropdown-menu {
+    position: absolute;
+    left: unset;
+    right: 0;
+  }
