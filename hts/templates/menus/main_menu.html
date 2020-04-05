@@ -1,4 +1,4 @@
-{% load menu_tags %}
+{% load menu_tags fontawesome %}
 <ul class="navbar-nav float-right">
     {% for item in menu_items %}
         <li class="nav-item {{ item.active_class }}{% if item.has_children_in_menu %} dropdown{% endif %}">
@@ -10,7 +10,8 @@
     {% endfor %}
     {% if user.is_authenticated %}
         {% if user.is_staff %}
-            <li class="nav-item"><a class="btn btn-secondary" href="/admin"><i class="material-icon">home_work</i></i></a></li>
+            <li class="nav-item"><a class="btn" title="Wagtail Admin Area" href="/admin">
+                {% fontawesome_icon 'superpowers' color='red' %}</a></li>
         {% endif %}
         <li class="nav-item"><div id="user-menu-mount"></div></li>
     {% else %}

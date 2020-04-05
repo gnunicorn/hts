@@ -1,4 +1,4 @@
-{% load static wagtailuserbar wagtailcore_tags misago_json menu_tags %}
+{% load static wagtailuserbar fontawesome wagtailcore_tags misago_json menu_tags %}
 {% load compress %}
 {% load bootstrap4 %}
 
@@ -23,10 +23,8 @@
         {# Global stylesheets #}
         {% compress css %}
         <link type="text/x-scss" href="{% static 'base.scss' %}" rel="stylesheet" media="screen">
-        {% endcompress %}
         <link href="{% static 'misago/css/misago.css' %}" rel="stylesheet">
-        
-        {% compress css %}
+        {% fontawesome_stylesheet %}
         <link type="text/x-scss" href="{% static 'custom.scss' %}" rel="stylesheet" media="screen">
         {% endcompress %}
 

@@ -62,6 +62,7 @@ INSTALLED_APPS = INSTALLED_PLUGINS + [
     'django_extensions',
     'bootstrap4',
     'instance_selector',
+    'fontawesome',
 
     "django.contrib.admin",
     "django.contrib.auth",

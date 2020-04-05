@@ -35,6 +35,7 @@ from django.utils.functional import cached_property
 from misago.users.models import User
 from misago.threads.models.post import Post
 from misago.readtracker.poststracker import make_read
+from fontawesome.fields import IconField
 
 from ..blocks import DEFAULT_BLOCKS
 
@@ -70,7 +71,7 @@ class Article(Page):
     it could be used for any type of page content that only needs a title,
     image, introduction and body field
     """
-
+    icon = IconField()
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
     related_discussion = models.ForeignKey("misago_threads.Thread", null=True, on_delete=models.SET_NULL)
 
@@ -78,6 +79,7 @@ class Article(Page):
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
     )
     content_panels = Page.content_panels + [
+        FieldPanel('icon'),
         StreamFieldPanel('content'),
         FieldPanel('tags'),
         InlinePanel(
