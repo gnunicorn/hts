@@ -72,16 +72,24 @@ class Article(Page):
     image, introduction and body field
     """
     icon = IconField()
+    cover = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
-    related_discussion = models.ForeignKey("misago_threads.Thread", null=True, on_delete=models.SET_NULL)
+    related_discussion = models.ForeignKey("misago_threads.Thread", blank=True, null=True, on_delete=models.SET_NULL)
 
     content = StreamField(
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
     )
     content_panels = Page.content_panels + [
         FieldPanel('icon'),
-        StreamFieldPanel('content'),
+        ImageChooserPanel('cover'),
         FieldPanel('tags'),
+        StreamFieldPanel('content'),
         InlinePanel(
             'authors', label="Author(s)",
             panels=None, min_num=1),

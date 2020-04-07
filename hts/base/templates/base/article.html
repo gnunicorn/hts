@@ -1,42 +1,45 @@
 {% extends "base.html" %}
-{% load misago_avatars %}
+{% load misago_avatars wagtailimages_tags %}
 
 {% block inner %}
 
+{% if page.cover %}
+<div
+    style="height: 30vh; min-height: 300px; background: url({% image_url page.cover 'width-1080' %}) center center; background-size: cover;"
+    class="d-flex align-items-end text-light py-3">
+
+{% else %}
 <div class="container-fluid bg-light border-top border-bottom text-dark py-3">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>
-                            {% if page.icon %}
-                            {{ page.icon.as_html }}
-                            {% endif %}
-                            {{page.title}}</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-muted">
-                        <span title="Erstmals publiziert: {{page.first_published_at | date:"DATETIME_FORMAT"}}">
-                            {{page.last_published_at | date:"DATETIME_FORMAT"}}
-                        </span>
-                        <span>
-                            von 
-                            {% for rel in page.authors.all %}
-                                {% with author=rel.author.user %}
-                                    <a href="{{author.get_absolute_url}}"><img src="{{author|avatar:15}}" height="15" />&nbsp;{{author.title | default:author.username}}</a>
-                                    {% if not forloop.last %},{% endif %}
-                                {% endwith %}
-                            {% endfor %}
-                        </span>
-                        {% if page.related_discussion %}
-                            | <a href="{{page.related_discussion.get_absolute_url}}">
-                                🗨️ {{page.discussions_query.count}}
-                            </a>
-                        {% endif %}
-                    </div>
-                </div>
+{% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>
+                    {% if page.icon %}
+                    {{ page.icon.as_html }}
+                    {% endif %}
+                    {{page.title}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-muted">
+                <span title="Erstmals publiziert: {{page.first_published_at | date:"DATETIME_FORMAT"}}">
+                    {{page.last_published_at | date:"DATETIME_FORMAT"}}
+                </span>
+                <span>
+                    von 
+                    {% for rel in page.authors.all %}
+                        {% with author=rel.author.user %}
+                            <a href="{{author.get_absolute_url}}"><img src="{{author|avatar:15}}" height="15" />&nbsp;{{author.title | default:author.username}}</a>
+                            {% if not forloop.last %},{% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </span>
+                {% if page.related_discussion %}
+                    | <a href="{{page.related_discussion.get_absolute_url}}">
+                        🗨️ {{page.discussions_query.count}}
+                    </a>
+                {% endif %}
             </div>
 
         </div>
