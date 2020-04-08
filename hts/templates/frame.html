@@ -23,7 +23,9 @@
         {# Global stylesheets #}
         {% compress css %}
         <link type="text/x-scss" href="{% static 'base.scss' %}" rel="stylesheet" media="screen">
-        <link href="{% static 'misago/css/misago.css' %}" rel="stylesheet">
+        <link type="text/x-scss" href="{% static 'misago.scss' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'material-icons/material-icons.css' %}" rel="stylesheet" media="screen">
+
         {% fontawesome_stylesheet %}
         <link type="text/x-scss" href="{% static 'custom.scss' %}" rel="stylesheet" media="screen">
         {% endcompress %}
