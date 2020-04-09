@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: local('IBM Plex Mono'),
+         local('IBMPlexMono-Regular'),
+         url(IBMPlexMono-Regular.ttf) format('truetype');
+  }
+
+@font-face {
+    font-family: 'IBM Plex Mono';
+    font-style: bold;
+    font-weight: 500;
+    src: local('IBM Plex Mono'),
+         local('IBMPlexMono-Bold'),
+         url(IBMPlexMono-Bold.ttf) format('truetype');
+  }
+  

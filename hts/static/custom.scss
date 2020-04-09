@@ -1,3 +1,7 @@
+.navbar-light a.navbar-brand {
+  font-family: "IBM Plex Mono";
+  font-weight: bold;
+}
 .nav.nav-user {
     display:: flex;
     align-items: center;
@@ -17,3 +21,7 @@
     left: unset;
     right: 0;
   }
+  .navbar-search {
+    display: none;
+  }
+

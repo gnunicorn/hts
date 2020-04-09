@@ -1,4 +1,4 @@
-{% load wagtailcore_tags menu_tags %}
+{% load wagtailcore_tags menu_tags fontawesome %}
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand" rel="author" href="{% slugurl 'home' %}">
@@ -15,7 +15,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        {% main_menu %}
+        <ul class="navbar-nav float-right">
+          <li class="nav-item">
+            <a class="btn text-muted" data-toggle="modal" data-target=".search-modal" title="Search">
+              {% fontawesome_icon 'search' %}
+            </a>
+          </li>
+          {% main_menu %}
+          {% if user.is_authenticated %}
+              {% if user.is_staff %}
+                  <li class="nav-item"><a class="btn" title="Wagtail Admin Area" href="/admin">
+                      {% fontawesome_icon 'superpowers' color='red' %}</a></li>
+              {% endif %}
+              <li class="nav-item"><div id="user-menu-mount"></div></li>
+          {% else %}
+              <li class="nav-item"><a class="btn btn-primary" href="/mitmachen">Mitmachen</a></li>
+          {% endif %}
+        </ul>
       </div>
     </div>
 </nav>
