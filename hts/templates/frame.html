@@ -87,6 +87,7 @@
                                 <div class="input-group input-group-lg">
                                     <input
                                         type="text"
+                                        id="search-input"
                                         class="form-control"
                                         placeholder="Suchbegriff eingeben"
                                         aria-label="Suchbegriff eingeben"
@@ -95,7 +96,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div id="search-results" class="md-12">
+                            <div id="search-spinner" class="col-md-12 p-3 text-center">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                            <div id="search-results" class="col-md-12">
 
                             </div>
                         </div>
@@ -106,10 +112,10 @@
           </div>
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/hts.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
-
+        <script type="text/javascript" src="{% static 'js/hts.js' %}"></script>
+        
         <script src="{% url 'django-i18n' %}?{{ LANGUAGE_CODE }}"></script>
         <script type="text/javascript">
           if (!(Object.assign && Array.from)) {
