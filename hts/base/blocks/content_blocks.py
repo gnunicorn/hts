@@ -47,6 +47,24 @@ class CardBlock(BaseBlock):
         icon = 'fa-list-alt'
         label = _('Card')
 
+class CollectionCardBlock(BaseBlock):
+    """
+    A component of information with image, text, and buttons.
+    """
+    page = blocks.PageChooserBlock(
+        label=_('Page'),
+        page_type="base.Article"
+    )
+    content = blocks.RichTextBlock(
+        features=['bold', 'italic', 'ol', 'ul', 'hr', 'link', 'document-link'],
+        label=_('Body'),
+    )
+
+    class Meta:
+        template = 'blocks/collection_card.html'
+        icon = 'fa-list-alt'
+        label = _('Collection Card')
+
 
 class CarouselBlock(BaseBlock):
     """

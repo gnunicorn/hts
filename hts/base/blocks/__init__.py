@@ -22,6 +22,7 @@ from .html_blocks import (
 )
 from .content_blocks import (  # noqa
     CardBlock,
+    CollectionCardBlock,
     CarouselBlock,
     ContentWallBlock,
     ImageGalleryBlock,
@@ -84,6 +85,7 @@ HTML_STREAMBLOCKS = [
 
 CONTENT_STREAMBLOCKS = HTML_STREAMBLOCKS + [
     ('card', CardBlock()),
+    ('collection_card', CollectionCardBlock()),
     ('carousel', CarouselBlock()),
     ('image_gallery', ImageGalleryBlock()),
     ('modal', ModalBlock(HTML_STREAMBLOCKS)),
@@ -98,7 +100,7 @@ NAVIGATION_STREAMBLOCKS = [
 ]
 
 BASIC_LAYOUT_STREAMBLOCKS = [
-    ('row', GridBlock(HTML_STREAMBLOCKS)),
+    ('row', GridBlock(CONTENT_STREAMBLOCKS)),
     ('html', blocks.RawHTMLBlock(icon='code', classname='monospace', label=_('HTML'))),
 ]
 
@@ -113,6 +115,7 @@ LAYOUT_STREAMBLOCKS = [
     ('row', GridBlock(CONTENT_STREAMBLOCKS)),
     ('cardgrid', CardGridBlock([
         ('card', CardBlock()),
+        ('collection', CollectionCardBlock())
     ])),
     ('html', blocks.RawHTMLBlock(icon='code', classname='monospace', label=_('HTML'))),
 ]
