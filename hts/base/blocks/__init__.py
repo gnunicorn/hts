@@ -31,7 +31,8 @@ from .content_blocks import (  # noqa
     NavExternalLinkWithSubLinkBlock,
     NavPageLinkWithSubLinkBlock,
     PriceListBlock,
-    ReusableContentBlock
+    ReusableContentBlock,
+    BubbleLinkBlock,
 )
 from .layout_blocks import (
     CardGridBlock,
@@ -69,6 +70,7 @@ HTML_STREAMBLOCKS = [
     ('button', ButtonBlock()),
     ('image', ImageBlock()),
     ('image_link', ImageLinkBlock()),
+    ('bubble_link', BubbleLinkBlock()),
     ("block_quote", BlockQuote()),
     ('html', blocks.RawHTMLBlock(icon='code', classname='monospace', label=_('HTML'), )),
     ('download', DownloadBlock()),

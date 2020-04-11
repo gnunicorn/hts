@@ -1,0 +1,29 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<a 
+    href="{{self.page.get_url}}"
+    class="{{self.settings.custom_css_class}} bubble-link d-block"
+    {% if self.settings.custom_css_id %}id="{{self.settings.custom_css_id}}"{% endif %}
+    >
+    <svg viewbox="0 0 550 550" class="d-block w-100">
+        <g transform="translate(275,275)">
+          <path
+            class="blob"
+            fill="
+                {% if self.bg_color %}
+                    {{self.bg_color}}
+                {% elif self.page.bg_color %}
+                    {{self.page.bg_color}}
+                {% else %}
+                    pink
+                {% endif %}
+            "
+            d=""
+            />
+        </g>
+    </svg>
+    <p class="link-text">
+        {% block icon %}{% endblock %}
+        <span class="h3">{{self.page.title}}</span>
+    </p>
+</a>

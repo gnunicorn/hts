@@ -1,9 +1,19 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags fontawesome %}
 
 <div class="card mb-3 {{self.settings.custom_css_class}}"
 {% if self.settings.custom_css_id %}id="{{self.settings.custom_css_id}}"{% endif %}>
+
+<a href="{{self.page.get_url}}">
+    <div class="card-header">
+        <h4 class="card-title">
+                {% if self.page.icon %}
+                    {{ self.page.icon.as_html }}
+                {% endif %}
+                {{self.page.title}}
+        </h4>
+    </div>
+</a>
     <div class="card-body">
-        <h5 class="card-title">{{self.page.title}}</h5>
         <div class="card-text">{{self.content}}</div>
     </div>
 </div>

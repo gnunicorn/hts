@@ -301,3 +301,17 @@ class ReusableContentBlock(BaseBlock):
         icon = 'fa-recycle'
         label = _('Reusable Content')
         template = 'blocks/reusable_content_block.html'
+
+
+class BubbleLinkBlock(BaseBlock):
+    """
+    A component rendering a link to page as our unique moving bubbles
+    """
+    page = blocks.PageChooserBlock(
+        label=_('Page'),
+    )
+
+    class Meta:
+        template = 'blocks/bubble_default.html'
+        icon = 'fa-circle-o'
+        label = _('Bubble Link')

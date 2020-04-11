@@ -1,0 +1,9 @@
+{% extends "blocks/bubble_default.html" %}
+
+{% load fontawesome %}
+{% block icon %}
+<span class="d-inline-block h2 rounded-circle p-3 border border-light">
+{% fontawesome_icon self.page.specific.icon color="inheret" %}
+</span>
+<br/>
+{% endblock %}
