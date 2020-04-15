@@ -13,7 +13,7 @@ RUN pip install -r /code/requirements.txt
 RUN pip install gunicorn
 
 # Copy the current directory contents into the container at /code/
-COPY .maintain/96docker-entrypoint.sh /code/
+COPY .maintain/docker-entrypoint.sh /code/
 COPY manage.py /code/
 COPY hts /code/hts
 # Set the working directory to /code/
