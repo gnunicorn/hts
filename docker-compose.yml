@@ -37,7 +37,3 @@ services:
       - elasticsearch:elasticsearch
     expose:
       - "8000"
-    depends_on:
-      - db
-      - redis
-      - elasticsearch
