@@ -21,7 +21,7 @@ RUN set -ex \
 
 # Set environment varibles
 ENV PYTHONUNBUFFERED 1
-ENV DJANGO_ENV production
+ENV DJANGO_SETTINGS_MODULE=hts.settings.production DJANGO_DEBUG=off
 
 RUN mkdir /code
 COPY ./requirements.txt /code/requirements.txt
@@ -50,13 +50,12 @@ COPY hts /code/hts
 # Set the working directory to /code/
 WORKDIR /code/
 
-RUN useradd wagtail
-RUN chown -R wagtail /code
-USER wagtail
+RUN chown -R root /code
+USER root
 
 EXPOSE 8000
 
-VOLUME ["/code/hts/media/", "/code/hts/static/"]
+VOLUME ["/code/media/", "/code/static/"]
 
 ENTRYPOINT ["/code/docker-entrypoint.sh"]
 

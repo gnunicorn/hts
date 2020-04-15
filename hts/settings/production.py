@@ -31,7 +31,7 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(';')
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # BASE_URL required for notification emails
-BASE_URL = string.format("https://{0}", os.getenv("VIRTUAL_HOST", 'localhost:8000'))
+BASE_URL = str.format("https://{0}", os.getenv("VIRTUAL_HOST", 'localhost:8000'))
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
@@ -59,7 +59,6 @@ if ELASTICSEARCH_ENDPOINT:
         }
     }
 
-MIDDLEWARE.append('whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGGING = {

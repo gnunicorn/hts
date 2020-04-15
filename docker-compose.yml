@@ -29,8 +29,8 @@ services:
       context: .
       dockerfile: ./.maintain/Dockerfile
     volumes:
-      - ./data/media:/code/hts/media
-      - ./data/static:/code/hts/static
+      - ./data/media:/code/media
+      - ./data/static:/code/static
     links:
       - hts-db:hts-db
       - hts-redis:hts-redis

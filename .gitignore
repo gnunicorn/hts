@@ -6,3 +6,5 @@ db.sqlite3
 /static
 /share
 media
+data
+docker-compose.override.yml
