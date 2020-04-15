@@ -12,8 +12,8 @@
             fill="
                 {% if self.bg_color %}
                     {{self.bg_color}}
-                {% elif self.page.bg_color %}
-                    {{self.page.bg_color}}
+                {% elif self.page.specific.bg_color %}
+                    {{self.page.specific.bg_color}}
                 {% else %}
                     pink
                 {% endif %}
@@ -22,7 +22,14 @@
             />
         </g>
     </svg>
-    <p class="link-text">
+    <p class="link-text" style="color:
+    {% if self.color %}
+        {{self.color}}
+    {% elif self.page.specific.color %}
+        {{self.page.specific.color}}
+    {% else %}
+        inherit
+    {% endif %}">
         {% block icon %}{% endblock %}
         <span class="h3">{{self.page.title}}</span>
     </p>

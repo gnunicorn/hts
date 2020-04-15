@@ -311,6 +311,19 @@ class BubbleLinkBlock(BaseBlock):
         label=_('Page'),
     )
 
+    bg_color = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        label=_('Bubble Background color'),
+        help_text=_('Hexadecimal, rgba, or CSS color notation (e.g. #ff0011)'),
+    )
+    color = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        label=_('Text color'),
+        help_text=_('Hexadecimal, rgba, or CSS color notation (e.g. #ff0011)'),
+    )
+
     class Meta:
         template = 'blocks/bubble_default.html'
         icon = 'fa-circle-o'
