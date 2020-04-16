@@ -12,6 +12,13 @@ if [ "x$DJANGO_LOAD_INITIAL_DATA" = 'xon' ]; then
 	python manage.py load_initial_data
 fi
 
-python manage.py migrate --noinput
-python manage.py collectstatic --noinput
-gunicorn hts.wsgi:application --bind 0.0.0.0:8000 --workers 6
+if [ "$1" = 'migrate' ]; then
+  python manage.py migrate --noinput
+  python manage.py collectstatic --noinput
+fi
+
+if [ "$1" = 'start' ]; then
+  gunicorn hts.wsgi:application --bind 0.0.0.0:8000 --workers 6
+fi
+
+exec "$@"
