@@ -72,6 +72,8 @@ class Article(Page):
     image, introduction and body field
     """
     icon = IconField()
+    background_color = models.CharField(max_length=120, blank=True, null=True)
+    foreground_color = models.CharField(max_length=120, blank=True, null=True)
     cover = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -86,14 +88,20 @@ class Article(Page):
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
     )
     content_panels = Page.content_panels + [
-        FieldPanel('icon'),
-        ImageChooserPanel('cover'),
-        FieldPanel('tags'),
         StreamFieldPanel('content'),
         InlinePanel(
             'authors', label="Author(s)",
             panels=None, min_num=1),
         InstanceSelectorPanel("related_discussion"),
+    ]
+
+    promote_panels = Page.promote_panels + [
+        FieldPanel('icon'),
+        ImageChooserPanel('cover'),
+        FieldPanel('background_color'),
+        FieldPanel('foreground_color'),
+        FieldPanel('tags'),
+
     ]
 
     @cached_property

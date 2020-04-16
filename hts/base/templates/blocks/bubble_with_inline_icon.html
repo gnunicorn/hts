@@ -5,28 +5,24 @@
     {% if self.settings.custom_css_id %}id="{{self.settings.custom_css_id}}"{% endif %}
 >
 <a href="{{self.page.get_url}}" class="row align-items-center my-3">
-    <span class="col-3 h1 text-center position-relative"
+    <span class="col-3 h1 text-center position-relative text-primary"
         style="
             {% if self.color %}
                 color:{{self.color}}
-            {% elif self.page.specific.color %}
-                color:{{self.page.specific.color}}
+            {% elif self.page.specific.foreground_color %}
+                color:{{self.page.specific.foreground_color}}
             {% endif %}
         "
     >
         <svg class="backgrounded w-75" viewbox="0 0 550 550">
             <g transform="translate(275, 275)">
             <path
-                class="blob"
-                fill="
+                class="blob text-secondary"
                     {% if self.bg_color %}
-                        {{self.bg_color}}
-                    {% elif self.page.specific.bg_color %}
-                        {{self.page.specific.bg_color}}
-                    {% else %}
-                        pink
+                        style="fill:{{self.bg_color}}"
+                    {% elif self.page.specific.background_color %}
+                        style="fill:{{self.page.specific.background_color}}"
                     {% endif %}
-                "
                 d=""
                 />
             </g>
