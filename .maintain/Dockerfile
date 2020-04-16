@@ -45,6 +45,7 @@ RUN set -ex \
 
 # Copy the current directory contents into the container at /code/
 COPY .maintain/docker-entrypoint.sh /code/
+COPY .maintain/hts-uwsgi.ini /code/
 COPY manage.py /code/
 COPY hts /code/hts
 # Set the working directory to /code/
@@ -59,4 +60,4 @@ VOLUME ["/code/media/", "/code/static/"]
 
 ENTRYPOINT ["/code/docker-entrypoint.sh"]
 
-CMD start
+CMD uwsgi --ini /code/hts-uwsgi.ini
