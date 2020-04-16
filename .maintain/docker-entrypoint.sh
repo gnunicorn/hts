@@ -15,10 +15,12 @@ fi
 if [ "$1" = 'migrate' ]; then
   python manage.py migrate --noinput
   python manage.py collectstatic --noinput
+  exit 0
 fi
 
 if [ "$1" = 'start' ]; then
   gunicorn hts.wsgi:application --bind 0.0.0.0:8000 --workers 6
+  exit 0
 fi
 
 exec "$@"
