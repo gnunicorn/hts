@@ -17,16 +17,10 @@ services:
     image: redis:3.0
     expose:
       - "6379"
-#  elasticsearch:
-#    image: elasticsearch:2.3
-#    restart: unless-stopped
-#    expose:
-#      - "9200"
   hts-app:
     environment:
       DATABASE_URL: postgres://hts_user:changeme@hts-db/hts_db
       CACHE_URL: redis://redis
-#      ELASTICSEARCH_ENDPOINT: elasticsearch
     build:
       context: .
       dockerfile: ./.maintain/Dockerfile
@@ -36,6 +30,5 @@ services:
     links:
       - hts-db:hts-db
       - hts-redis:hts-redis
-#      - elasticsearch:elasticsearch
     expose:
       - "8000"
