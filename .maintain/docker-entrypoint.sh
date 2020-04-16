@@ -18,4 +18,4 @@ if [ "$1" = 'migrate' ]; then
   exit 0
 fi
 
-gunicorn hts.wsgi:application --bind 0.0.0.0:8000 --workers 6
+uwsgi --ini /code/hts-uwsgi.ini
