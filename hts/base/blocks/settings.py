@@ -139,7 +139,7 @@ cr_settings = {
             ('blocks/pagepreview_form.html', 'Form inputs'),
         ),
         'bubblelinkblock' : (
-            ('blocks/bubble_with_icon.html', 'With icon'),
+            ('blocks/bubble_with_inline_icon.html', 'With Inline icon'),
             # ('blocks/bubble_with_image.html', 'With image'),
         ),
         # templates that are available for all block types

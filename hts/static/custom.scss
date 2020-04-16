@@ -27,12 +27,16 @@
 
 .bubble-link  {
   position: relative;
-  text-align: center;
 }
-  .bubble-link .link-text {
+  .bubble-link .backgrounded {
     position: absolute;
     top: 50%;
     left: 50%;
+    z-index: 0;
     transform: translate(-50%, -50%);
+  }
+  .bubble-link .fa {
+    position: relative;
+    z-index: 1; 
   }
 

@@ -3,7 +3,7 @@
 //
 
 $white:    #fff !default;
-$gray-100: #f8f9fa !default;
+$gray-100: #f5f9fb !default;
 $gray-200: #f7f7f9 !default;
 $gray-300: #eceeef !default;
 $gray-400: #ced4da !default;
@@ -12,21 +12,21 @@ $gray-600: #888 !default;
 $gray-700: #5a5a5a !default;
 $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
-$black:    #000 !default;
+$black:    #0d041b !default;
 
-$blue:    #007bff !default;
+$blue:    #0e1869 !default;
 $indigo:  #6610f2 !default;
-$purple:  #6f42c1 !default;
-$pink:    #e83e8c !default;
+$purple:  #30006e !default;
+$pink:    #FE4066 !default;
 $red:     #FF7851 !default;
-$orange:  #fd7e14 !default;
-$yellow:  #FFCE67 !default;
+$orange:  #dd842d !default;
+$yellow:  #f4ca10 !default;
 $green:   #56CC9D !default;
-$teal:    #20c997 !default;
+$teal:    #00dcd4 !default;
 $cyan:    #6CC3D5 !default;
 
 $primary:       #FE4066 !default;
-$secondary:     #F3969A !default;
+$secondary:     #f4ca10 !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
@@ -38,7 +38,7 @@ $yiq-contrasted-threshold: 250 !default;
 
 // Body
 
-$body-color:                #161c2d !default;
+$body-color:                #3c4856 !default;
 $body-background:           #f9fbfd;
 
 // Components

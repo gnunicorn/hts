@@ -70,7 +70,6 @@ HTML_STREAMBLOCKS = [
     ('button', ButtonBlock()),
     ('image', ImageBlock()),
     ('image_link', ImageLinkBlock()),
-    ('bubble_link', BubbleLinkBlock()),
     ("block_quote", BlockQuote()),
     ('html', blocks.RawHTMLBlock(icon='code', classname='monospace', label=_('HTML'), )),
     ('download', DownloadBlock()),
@@ -90,9 +89,10 @@ CONTENT_STREAMBLOCKS = HTML_STREAMBLOCKS + [
     ('collection_card', CollectionCardBlock()),
     ('carousel', CarouselBlock()),
     ('image_gallery', ImageGalleryBlock()),
-    ('modal', ModalBlock(HTML_STREAMBLOCKS)),
-    ('pricelist', PriceListBlock()),
+    # ('modal', ModalBlock(HTML_STREAMBLOCKS)),
+    # ('pricelist', PriceListBlock()),
     ('reusable_content', ReusableContentBlock()),
+    ('bubble_link', BubbleLinkBlock(HTML_STREAMBLOCKS)),
 ]
 
 NAVIGATION_STREAMBLOCKS = [

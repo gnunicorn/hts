@@ -1,0 +1,45 @@
+{% load wagtailcore_tags wagtailimages_tags fontawesome %}
+
+<div
+    class="{{self.settings.custom_css_class}} bubble-link container-fluid"
+    {% if self.settings.custom_css_id %}id="{{self.settings.custom_css_id}}"{% endif %}
+>
+<a href="{{self.page.get_url}}" class="row align-items-center my-3">
+    <span class="col-3 h1 text-center position-relative"
+        style="
+            {% if self.color %}
+                color:{{self.color}}
+            {% elif self.page.specific.color %}
+                color:{{self.page.specific.color}}
+            {% endif %}
+        "
+    >
+        <svg class="backgrounded w-75" viewbox="0 0 550 550">
+            <g transform="translate(275, 275)">
+            <path
+                class="blob"
+                fill="
+                    {% if self.bg_color %}
+                        {{self.bg_color}}
+                    {% elif self.page.specific.bg_color %}
+                        {{self.page.specific.bg_color}}
+                    {% else %}
+                        pink
+                    {% endif %}
+                "
+                d=""
+                />
+            </g>
+        </svg>
+        {% fontawesome_icon self.page.specific.icon color="inherit" %}
+    </span>
+    <span class="h3 col-9">{{self.page.title}}</span>
+</a>
+<div class="row">
+    <div class="col-md-offset-3 col-md-9">
+        {% for block in self.content %}
+        {% include_block block %}
+        {% endfor %}
+    </div>
+</div>
+</div>
