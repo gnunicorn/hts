@@ -327,6 +327,7 @@ class BubbleLinkBlock(BaseLayoutBlock):
     content = blocks.StreamBlock(
         [],
         label=_('Content'),
+        blank=True,
         required=False,
     )
 
