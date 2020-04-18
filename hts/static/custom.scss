@@ -65,12 +65,16 @@ body.no-logo .navbar-brand {
 }
 @keyframes noise-anim {
   $steps: 10;
+  $pause: 0.3;
   @for $i from 0 through $steps {
-    #{percentage($i*(1/$steps))} {
+    #{percentage($i*((1-$pause)/$steps))} {
       $top: random(100);
       $bottom: random(101 - $top);
       clip-path: inset(#{$top}% 0 #{$bottom}%  0);
     }
+  }
+  #{percentage(1-$pause)} {
+    clip-path: inset(0 0 0 0);
   }
 }
 .glitch::after {
@@ -82,8 +86,8 @@ body.no-logo .navbar-brand {
   color: #FE4066;
   background: white;
   overflow: hidden;
-  animation: noise-anim 4s infinite linear alternate-reverse;
-  animation-delay: 2s;
+  animation: noise-anim 11s infinite linear;
+  animation-delay: 2;
 }
 
 @keyframes noise-anim-2 {
@@ -105,6 +109,6 @@ body.no-logo .navbar-brand {
   color: #FE4066;
   background: white;
   overflow: hidden;
-  animation: noise-anim-2 15s infinite linear alternate-reverse;
-  animation-delay: 5s;
+  animation: noise-anim-2 3s infinite linear;
+  animation-delay: 2s;
 }
