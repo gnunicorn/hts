@@ -112,3 +112,12 @@ body.no-logo .navbar-brand {
   animation: noise-anim-2 3s infinite linear;
   animation-delay: 2s;
 }
+
+
+// square image support
+
+.squared {
+  position:relative;
+  overflow:hidden;
+  padding-bottom:100%;
+}
