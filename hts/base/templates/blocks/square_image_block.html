@@ -12,8 +12,10 @@ alt="{{self_image.image.title}}"></amp-img>
 
 {% else %}
 
-<div class="squared {{self.settings.custom_css_class}}"
-  style="background: url({{self_image.url}}) no-repeat; background-size: cover"
+<div
+    class="squared {{self.settings.custom_css_class}}"
+    style="background: url({{self_image.url}}) no-repeat; background-size: cover"
     {% if self.custom_css_id %}id="{{self.settings.custom_css_id}}"{% endif %}
-    alt="{{self_image.image.title}}" />
+    title="{{self_image.image.title}}"
+></div>
 {% endif %}
