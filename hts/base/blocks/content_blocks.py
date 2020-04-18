@@ -83,6 +83,7 @@ class ImageGalleryBlock(BaseBlock):
     Show a collection of images with interactive previews that expand to
     full size images in a modal.
     """
+
     collection = CollectionChooserBlock(
         required=True,
         label=_('Image Collection'),
@@ -303,7 +304,7 @@ class ReusableContentBlock(BaseBlock):
         template = 'blocks/reusable_content_block.html'
 
 
-class BubbleLinkBlock(BaseLayoutBlock):
+class BubbleLinkBlock(BaseBlock):
     """
     A component rendering a link to page as our unique moving bubbles
     """
@@ -324,8 +325,7 @@ class BubbleLinkBlock(BaseLayoutBlock):
         help_text=_('Hexadecimal, rgba, or CSS color notation (e.g. #ff0011)'),
     )
 
-    content = blocks.StreamBlock(
-        [],
+    content = blocks.RichTextBlock(
         label=_('Content'),
         blank=True,
         required=False,

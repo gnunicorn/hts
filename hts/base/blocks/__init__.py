@@ -84,7 +84,7 @@ CONTENT_STREAMBLOCKS = HTML_STREAMBLOCKS + [
     # ('modal', ModalBlock(HTML_STREAMBLOCKS)),
     # ('pricelist', PriceListBlock()),
     ('reusable_content', ReusableContentBlock()),
-    ('bubble_link', BubbleLinkBlock(HTML_STREAMBLOCKS)),
+    ('bubble_link', BubbleLinkBlock()),
 ]
 
 NAVIGATION_STREAMBLOCKS = [
