@@ -48,3 +48,56 @@
 .text-three-cols p {
   column-count: 3;
 }
+
+// glitching animation
+.glitch {
+  background: white;
+  font-weight: bold;
+  font-family: "IBM Plex One", sans-serif;
+  color: #FE4066;
+  position: relative;
+  margin: 0 auto;
+}
+@keyframes noise-anim {
+  $steps: 10;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      $top: random(100);
+      $bottom: random(101 - $top);
+      clip-path: inset(#{$top}% 0 #{$bottom}%  0);
+    }
+  }
+}
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 #FE4066;
+  top: 0;
+ color: #FE4066;
+ background: white;
+  overflow: hidden;
+  animation: noise-anim 4s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2 {
+  $steps: 20;
+  @for $i from 0 through $steps {
+    #{percentage($i*(1/$steps))} {
+      $top: random(100);
+      $bottom: random(101 - $top);
+      clip-path: inset(#{$top}% 0 #{$bottom}%  0);
+    }
+  }
+}
+.glitch::before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 #FE4066;
+  top: 0;
+  color: #FE4066;
+  background: white;
+  overflow: hidden;
+  animation: noise-anim-2 15s infinite linear alternate-reverse;
+}
