@@ -54,18 +54,10 @@ from .base_blocks import (  # noqa
     EmbedBlock
 )
 
-DEFAULT_BLOCKS = [
-    ("heading_block", HeadingBlock()),
-    ("paragraph_block", RichTextBlock(
-            icon="fa-paragraph",
-            template="blocks/paragraph_block.html"
-        )),
-    ("block_quote", BlockQuote()),
-]
-
 # Collections of blocks commonly used together.
 
 HTML_STREAMBLOCKS = [
+    ("heading_block", HeadingBlock()),
     ('text', RichTextBlock(icon='fa-file-text-o')),
     ('button', ButtonBlock()),
     ('image', ImageBlock()),

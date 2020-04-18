@@ -337,11 +337,23 @@ class HeadingBlock(StructBlock):
     """
     heading_text = CharBlock(classname="title", required=True)
     size = ChoiceBlock(choices=[
-        ('', 'Select a header size'),
+        ('h1', 'H1'),
         ('h2', 'H2'),
         ('h3', 'H3'),
-        ('h4', 'H4')
-    ], blank=True, required=False)
+        ('h4', 'H4'),
+        ('h5', 'H5')
+    ], blank=True, required=True, default="h2")
+
+    custom_css_class = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        label=_('Custom CSS Class'),
+    )
+    custom_id = blocks.CharBlock(
+        required=False,
+        max_length=255,
+        label=_('Custom ID'),
+    )
 
     class Meta:
         icon = "title"
