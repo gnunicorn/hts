@@ -2,6 +2,11 @@
   font-family: "IBM Plex Mono";
   font-weight: bold;
 }
+
+body.no-logo .navbar-brand {
+  display: none;
+}
+
 .nav.nav-user {
     display:: flex;
     align-items: center;
@@ -74,10 +79,11 @@
   left: 2px;
   text-shadow: -1px 0 #FE4066;
   top: 0;
- color: #FE4066;
- background: white;
+  color: #FE4066;
+  background: white;
   overflow: hidden;
   animation: noise-anim 4s infinite linear alternate-reverse;
+  animation-delay: 2s;
 }
 
 @keyframes noise-anim-2 {
@@ -100,4 +106,5 @@
   background: white;
   overflow: hidden;
   animation: noise-anim-2 15s infinite linear alternate-reverse;
+  animation-delay: 5s;
 }

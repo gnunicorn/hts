@@ -63,6 +63,7 @@ INSTALLED_APPS = INSTALLED_PLUGINS + [
     'bootstrap4',
     'instance_selector',
     'fontawesome',
+    'wagtailmetadata',
 
     "django.contrib.admin",
     "django.contrib.auth",

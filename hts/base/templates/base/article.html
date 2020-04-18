@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load misago_avatars wagtailimages_tags %}
 
+{% block body_class %}{{page.css_page_classes}}{% endblock %}
+
 {% block inner %}
 
 {% if page.cover %}

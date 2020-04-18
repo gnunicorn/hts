@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block body_class %}{{page.css_page_classes}}{% endblock %}
+
 {% block inner %}
     {{ page.content }}
 {% endblock %}

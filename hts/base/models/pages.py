@@ -35,12 +35,24 @@ from django.utils.functional import cached_property
 from misago.users.models import User
 from misago.threads.models.post import Post
 from misago.readtracker.poststracker import make_read
+from wagtailmetadata.models import MetadataPageMixin
 from fontawesome.fields import IconField
 
 from ..blocks import DEFAULT_BLOCKS
 
+class CommonPageProperties(MetadataPageMixin, models.Model):
+    css_page_classes = models.CharField(max_length=255, blank=True, null=True,
+        verbose_name="Custom html body classes")
+    
+    promote_panels = MetadataPageMixin.promote_panels + [
+        MultiFieldPanel([FieldPanel('css_page_classes')], "Page Customisation")
+    ]
 
-class Author(Page):
+    class Meta:
+        abstract = True
+
+
+class Author(CommonPageProperties, Page):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content_panels = Page.content_panels + [
         FieldPanel('user'),
@@ -55,7 +67,7 @@ class ArticleTag(TaggedItemBase):
         on_delete=models.CASCADE, related_name='tagged_items')
 
 
-class RegularPage(Page):
+class RegularPage(CommonPageProperties, Page):
 
     content = StreamField(
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
@@ -65,7 +77,7 @@ class RegularPage(Page):
     ]
 
 
-class Article(Page):
+class Article(CommonPageProperties, Page):
     """
     A generic content page. On this demo site we use it for an about page but
     it could be used for any type of page content that only needs a title,
@@ -95,14 +107,15 @@ class Article(Page):
         InstanceSelectorPanel("related_discussion"),
     ]
 
-    promote_panels = Page.promote_panels + [
-        FieldPanel('icon'),
-        ImageChooserPanel('cover'),
-        FieldPanel('background_color'),
-        FieldPanel('foreground_color'),
+    promote_panels = [
+        MultiFieldPanel([
+            FieldPanel('icon'),
+            ImageChooserPanel('cover'),
+            FieldPanel('background_color'),
+            FieldPanel('foreground_color'),
+        ], "Page Design"),
         FieldPanel('tags'),
-
-    ]
+    ] + CommonPageProperties.promote_panels
 
     @cached_property
     def comments(self):
