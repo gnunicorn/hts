@@ -63,9 +63,13 @@ setTimeout(function(){
       }
       
       function refresh(elem) {
-              let refreshRate = Math.floor(Math.random() * (refreshRateMax - refreshRateMin + 1)) + refreshRateMin;
-          SVG(elem).animate(refreshRate + 100, 0, "now").ease("-").attr({"d": next_path()});
-          setTimeout(() => refresh(elem), refreshRate);
+            let refreshRate = Math.floor(Math.random() * (refreshRateMax - refreshRateMin + 1)) + refreshRateMin;
+            SVG(elem)
+                .animate(refreshRate + 100, 0, "now")
+                .ease("-")
+                .attr({"d": next_path()})
+                .rotate(35)
+                .after(() => refresh(elem));
       }
       
       function start() {
