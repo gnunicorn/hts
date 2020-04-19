@@ -1,4 +1,4 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags bubbles %}
 
 <a 
     href="{{self.page.get_url}}"
@@ -18,7 +18,7 @@
                     pink
                 {% endif %}
             "
-            d=""
+            d="{% random_bubble_path %}"
             />
         </g>
     </svg>

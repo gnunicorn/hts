@@ -1,4 +1,4 @@
-{% load wagtailcore_tags wagtailimages_tags fontawesome %}
+{% load wagtailcore_tags wagtailimages_tags fontawesome bubbles %}
 
 <div
     class="{{self.settings.custom_css_class}} bubble-link container-fluid"
@@ -23,7 +23,8 @@
                     {% elif self.page.specific.background_color %}
                         style="fill:{{self.page.specific.background_color}}"
                     {% endif %}
-                d=""
+                    d="{% random_bubble_path %}"
+                
                 />
             </g>
         </svg>

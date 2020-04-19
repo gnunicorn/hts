@@ -1,4 +1,4 @@
-{% load wagtailcore_tags wagtailimages_tags fontawesome %}
+{% load wagtailcore_tags wagtailimages_tags fontawesome bubbles %}
 
 <a href="{{self.page.get_url}}"
     class="bubble-link flex align-items-center py-2 {{self.settings.custom_css_class}}"
@@ -22,8 +22,8 @@
                     {% elif self.page.specific.background_color %}
                         style="fill:{{self.page.specific.background_color}}"
                     {% endif %}
-                d=""
-                />
+                    d="{% random_bubble_path %}"
+                    />
             </g>
         </svg>
         {% fontawesome_icon self.page.specific.icon color="inherit" %}
