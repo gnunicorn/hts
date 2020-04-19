@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 from misago import load_plugin_list_if_exists
 
+_ = lambda s: s
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
@@ -315,6 +316,31 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache"
     }
 }
+
+
+MISAGO_PROFILE_FIELDS = [
+    {
+        "name": _("Personal"),
+        "fields": [
+            "misago.users.profilefields.default.RealNameField",
+            "hts.base.lib.profilefields.PronounField",
+            "misago.users.profilefields.default.BioField",
+            "misago.users.profilefields.default.LocationField",
+        ],
+    },
+    {
+        "name": _("Contact"),
+        "fields": [
+            "misago.users.profilefields.default.TwitterHandleField",
+            "misago.users.profilefields.default.WebsiteField",
+        ],
+    },
+    {
+        "name": _("IP address"),
+        "fields": ["misago.users.profilefields.default.JoinIpField"],
+    },
+]
+
 
 
 # Static files (CSS, JavaScript, Images)
