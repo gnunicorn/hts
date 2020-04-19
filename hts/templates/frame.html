@@ -56,23 +56,27 @@
             </section>
             
             <div class="py-5 border-top">
-            <div class="container">
-                <div class="row">
-                <div class="ml-auto">
-                    <p class="h5 mb-3">{% if site_name %}- {{ site_name }}{% endif %}</p>
-
-                    <ul class="navbar-nav">
-                        {% main_menu max_levels=1 %}
-                    </ul>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <a href="/" class="d-inline-block mb-3 text-brand-primary font-weight-bold">HACK_THE_SYSTEM_</a>
+                        </div>
+                        <div class="col-md-4">
+                            {% flat_menu 'footer-primary' %}
+                        </div>
+                        <div class="col-md-4">
+                            {% flat_menu 'footer-secondary' %}
+                        </div>
+                        <div class="col-md-4">
+                            {% flat_menu 'legal'%}
+                        </div>
+                        <div class="col-md-5 col-md-offset-7 text-right text-small">
+                            <p>
+                                © 2020-{% now "Y" %} HTS, CC BY-SA
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            
-                <div class="col-sm text-right">
-                    © 2020 HTS
-                </div>
-            
-                </div>
-            
-            </div>
             </div>
             
         </footer>
