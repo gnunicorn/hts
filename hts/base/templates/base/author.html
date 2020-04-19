@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load fontawesome misago_avatars wagtailcore_tags wagtailimages_tags %}
+
+{% block inner %}
+<div class="container">
+    <div class="row align-items-center bg-light mt-5 mb-5 pt-5 pb-5">
+        <div class="col-md-4 text-center">
+            {% if page.avatar %}
+                {% image page.avatar max-300x300 as self_image %}
+
+                <img src="{{self_image.url}}"
+                class="w-100" />
+                
+            {% elif page.user %}
+                <a href="{{ page.user.get_absolute_url }}">
+                    <img src="{{ page.user|avatar:200 }}" alt="">
+                </a>
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            {% if page.get_name %}
+                <h1 class="mt-0 text-brand-secondary">
+                    {{page.get_name}}
+                    {% if page.user %}
+                        <small><a class="text-small text-brand-primary font-weight-bold"
+                            href="{{page.user.get_absolute_url}}">
+                                @{{page.user.username}}</a></small>
+                    {% endif %}
+                </h1>
+            {% else %}
+                <h1 class="mt-0 text-brand-primary font-weight-bold">
+                    <a class="text-small"
+                    href="">@{{page.user.username}}</a>
+                </h1>
+            {% endif %}
+            <p>
+                {% if page.get_pronoun %}
+
+                    {% fontawesome_icon 'quote-left' %}
+                    {{page.get_pronoun}}
+                {% endif %}
+                {% if page.get_website %}
+                    {% fontawesome_icon 'home' %}
+                    <a target="_blank"
+                        href="{{page.get_website}}">
+                        {{page.get_website}}
+                    </a>
+                {% endif %}
+                {% if page.get_twitter %}
+                    {% fontawesome_icon 'twitter' %}
+                    <a target="_blank"
+                        title="twitter"
+                        href="https://twitter.com/{{page.get_twitter}}">
+                        @{{page.get_twitter}}
+                    </a>
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-md-8 col-md-offset-4">
+            {{self.get_bio | richtext}}
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <h3 class="d-inline">Beteiligt an</h3> (Auswahl)
+        </div>
+    </div>
+    <div class="row mt-4">
+        <ul>
+            {% for article in page.get_articles %}
+                <li><a href="{{article.full_url}}">{{article.title}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

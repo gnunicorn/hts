@@ -20,7 +20,11 @@
    <div class="container">
         <div class="row align-items-center ">
             <div
-                class="col-md-6 pl-3"
+                {% if page.cover %}
+                    class="col-md-6 pl-3"
+                {% else %}
+                    class="col-12  pl-3"
+                {% endif %}
                 {% if page.background_color %}
                 style="border-left: 1.5em solid {{page.background_color}}; color: {{page.foreground_color}}"
                 {% endif %}
@@ -36,11 +40,19 @@
                     </span>
                     <span>
                         von 
-                        {% for rel in page.authors.all %}
-                            {% with author=rel.author.user %}
-                                <a href="{{author.get_absolute_url}}"><img src="{{author|avatar:15}}" height="15" />&nbsp;{{author.title | default:author.username}}</a>
-                                {% if not forloop.last %},{% endif %}
-                            {% endwith %}
+                        {% for author in page.get_authors %}
+                            <a href="{{author.get_url}}">
+
+                            {% if author.avatar %}
+                                {% image author.avatar max-30x30 as self_image %}
+
+                                <img style="height: 1em" src="{{self_image.url}}" alt="{{author.get_any_name}}" />
+                                
+                            {% elif author.user %}
+                                <img style="height: 1em" src="{{ author.user|avatar:200 }}" alt="{{author.get_any_name}}">
+                            {% endif %}
+                            &nbsp;{{author.get_any_name}}</a>
+                            {% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </span>
                     {% if page.related_discussion %}

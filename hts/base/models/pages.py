@@ -53,14 +53,78 @@ class CommonPageProperties(MetadataPageMixin, models.Model):
 
 
 class Author(CommonPageProperties, Page):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True)
+
+    avatar = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    name = models.CharField(max_length=255, blank=True, null=True)
+    website = models.CharField(max_length=255, blank=True, null=True)
+    bio = RichTextField(blank=True, null=True)
+    
     content_panels = Page.content_panels + [
         FieldPanel('user'),
+        MultiFieldPanel([
+            ImageChooserPanel('avatar'),
+            FieldPanel('name'),
+            FieldPanel('website'),
+            FieldPanel('bio'),
+            ], "Author Overwrites")
     ]
 
+    def _get_inner(self, local, profile_field):
+        if local:
+            return local
+
+        if self.user:
+            return self.user.profile_fields.get(profile_field, None) 
+
+    def get_name(self):
+        return self._get_inner(self.name, "real_name")
+
+    def get_any_name(self):
+        name = self.get_name()
+
+        if not name and self.user:    
+            name = self.user.username
+        return name
+
+    def get_website(self):
+        return self._get_inner(self.website, "website")
+
+    def get_bio(self):
+        return self._get_inner(self.bio, "bio")
+
+    def get_pronoun(self):
+        if self.user:
+            return self.user.profile_fields.get("pronouns", None)
+
+    def get_twitter(self):
+        if self.user:
+            return self.user.profile_fields.get("twitter", None)
+
+    @cached_property
+    def get_articles(self):
+        articles = [a.article for a in self.articles
+        # FIXME: Also shows non-public right now
+            # .filter("article__live=True")
+            .order_by('-article__last_published_at')
+            .prefetch_related("article")[:12]]
+        return articles
+
 class AuthorArticleRel(Orderable):
-    author = ParentalKey(Author, on_delete=models.CASCADE)
-    article = ParentalKey('Article', related_name="authors", on_delete=models.CASCADE)
+    author = ParentalKey(Author, on_delete=models.CASCADE,
+        related_name="articles")
+    article = ParentalKey('Article', related_name="authors",
+        on_delete=models.CASCADE)
 
 class ArticleTag(TaggedItemBase):
     content_object = ParentalKey('base.Article',
@@ -94,7 +158,8 @@ class Article(CommonPageProperties, Page):
         related_name='+'
     )
     tags = ClusterTaggableManager(through=ArticleTag, blank=True)
-    related_discussion = models.ForeignKey("misago_threads.Thread", blank=True, null=True, on_delete=models.SET_NULL)
+    related_discussion = models.ForeignKey("misago_threads.Thread",
+        blank=True, null=True, on_delete=models.SET_NULL)
 
     content = StreamField(
         DEFAULT_BLOCKS, verbose_name="Article", blank=True
@@ -122,7 +187,11 @@ class Article(CommonPageProperties, Page):
         comments = self.discussions_query().order_by('likes')[:5]
         make_read(comments)
         return comments
-        
+    
+    @cached_property
+    def get_authors(self):
+        return [a.author for a in self.authors.prefetch_related("author")]
+
     def discussions_query(self):
         return Post.objects.filter(
             models.Q(
