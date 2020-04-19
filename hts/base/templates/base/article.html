@@ -1,7 +1,21 @@
 {% extends "base.html" %}
-{% load misago_avatars wagtailimages_tags %}
+{% load static misago_avatars compress wagtailimages_tags %}
 
-{% block body_class %}{{page.css_page_classes}}{% endblock %}
+{% block extra_css %}
+    {% compress css %}
+    <link type="text/css" href="{% static 'css/toc.css' %}" rel="stylesheet" media="screen">
+    {% endcompress %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript" src="{% static 'js/toc.js' %}"></script>
+{% endblock %}
+
+{% block body_attrs %}
+    class="{{page.css_page_classes}}"
+    data-spy="scroll"
+    data-target="#toc"
+{% endblock %}
 
 {% block inner %}
 
@@ -70,9 +84,13 @@
         </div>
     </div>
 </div>
-<div class="container py-5">
-    
-    {{ page.content }}
+
+<div>
+    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+
+    <div class="container py-5">
+        {{ page.content }}
+    </div>
 </div>
 {% if page.comments %}
     <div class="container-fluid bg-light border-top border-bottom text-dark py-3">

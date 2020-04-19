@@ -37,7 +37,7 @@
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body {% block body_attrs %}class="{% block body_class %}{% endblock %}"{% endblock %}>
         {% include "menus/top_navbar.html" %}
         
         {# Display django.contrib.messages as Bootstrap alerts #}
