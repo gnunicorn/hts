@@ -41,7 +41,7 @@ services:
     build:
       context: .
       dockerfile: ./.maintain/Dockerfile
-    command: celery -A hts worker --loglevel=info
+    command: worker
     tty: true
     volumes:
       - ./data/media:/code/media

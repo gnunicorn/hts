@@ -18,4 +18,10 @@ if [ "$1" = 'migrate' ]; then
   exit 0
 fi
 
+
+if [ "$1" = 'worker' ]; then
+  celery -A hts worker --loglevel=info
+  exit 0
+fi
+
 uwsgi --ini /code/hts-uwsgi.ini
