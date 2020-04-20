@@ -102,20 +102,27 @@
 
         </footer>
 
-        <div class="login-modal modal fade"
-            id="modal-mount"
-            tabindex="-1" role="dialog"
-            aria-labelledby="LoginModal" aria-hidden="true"
-            >
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body text-center">
-                        <h2>Community Zugang</h2>
-                        <div id="user-menu-mount" class="d-inline-block"></div>
+
+        {% if not user.is_authenticated %}
+            <div id="auth-message-mount"></div>
+
+            <div class="login-modal modal fade"
+                id="modal-mount"
+                tabindex="-1" role="dialog"
+                aria-labelledby="LoginModal" aria-hidden="true"
+                >
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <h2>Community Zugang</h2>
+                            <div id="user-menu-mount" class="d-inline-block"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            {% include "misago/auth.html" %}
+        {% endif %}
+
 
         <div class="search-modal modal fade" tabindex="-1" role="dialog" aria-labelledby="SearchModal" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
