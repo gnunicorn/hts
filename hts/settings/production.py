@@ -44,6 +44,8 @@ BASE_URL = str.format("https://{0}", os.getenv("VIRTUAL_HOST", 'localhost:8000')
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
+CELERY_BROKER_URL = os.getenv('CELERY_URL', "redis://hts-redis:6379/1")
+
 # configure CACHES from CACHE_URL environment variable (defaults to locmem if no CACHE_URL is set)
 CACHES = {'default': django_cache_url.config()}
 

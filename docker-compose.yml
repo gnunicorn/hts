@@ -20,7 +20,8 @@ services:
   hts-app:
     environment:
       DATABASE_URL: postgres://hts_user:changeme@hts-db/hts_db
-      CACHE_URL: redis://redis
+      CACHE_URL: "redis://hts-redis:6379/0"
+      CELERY_URL: "redis://hts-redis:6379/1"
     build:
       context: .
       dockerfile: ./.maintain/Dockerfile
@@ -32,3 +33,19 @@ services:
       - hts-redis:hts-redis
     expose:
       - "8000"
+  hts-worker:
+    environment:
+      DATABASE_URL: "postgres://hts_user:changeme@hts-db/hts_db"
+      CACHE_URL: "redis://hts-redis:6379/0"
+      CELERY_URL: "redis://hts-redis:6379/1"
+    build:
+      context: .
+      dockerfile: ./.maintain/Dockerfile
+    command: celery -A hts worker --loglevel=info
+    tty: true
+    volumes:
+      - ./data/media:/code/media
+      - ./data/static:/code/static
+    links:
+      - hts-db:hts-db
+      - hts-redis:hts-redis
