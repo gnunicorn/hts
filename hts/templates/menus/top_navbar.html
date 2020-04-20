@@ -29,6 +29,11 @@
               {% endif %}
               <li class="nav-item"><div id="user-menu-mount"></div></li>
           {% else %}
+            <li class="nav-item">
+              <a class="btn text-muted" data-toggle="modal" data-target=".login-modal" title="login">
+                {% fontawesome_icon 'sign-in' %}
+              </a>
+            </li>
               <li class="nav-item"><a class="btn btn-primary" href="/mitmachen">Mitmachen</a></li>
           {% endif %}
         </ul>
