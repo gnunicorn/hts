@@ -6,7 +6,7 @@
 
 {% image self.background_image max-1200x600 as background_image %}
 <div class="hero-bg {% if self.is_parallax %}parallax{% endif %} {% if self.tile_image %}tile{% endif %} {{self.settings.custom_css_class}}"
-    style="{% if self.background_color %}background-color:{{self.background_color}};{% endif %}{% if background_image %}background-image:url({{background_image.url}});{% endif %}"
+    style="{% if self.background_color %}background-color:{{self.background_color}};{% endif %}{% if background_image %}background-image:url({{background_image.url}}) no-repeat; background-size: cover{% endif %}"
     {% if self.custom_css_id %}id="{{self.settings.custom_css_id}}"{% endif %}>
     <div class="hero-fg" style="{% if self.foreground_color %}color:{{self.foreground_color}};{% endif %}">
         {% include_block self.content %}
