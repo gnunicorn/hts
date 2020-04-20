@@ -28,7 +28,15 @@ SECURE_SSL_REDIRECT = os.getenv('DJANGO_SECURE_SSL_REDIRECT', 'off') == 'on'
 # See https://docs.djangoproject.com/en/1.10/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(';')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_DEFAULT_SENDER', 'root@localhost')
+
+if os.getenv('EMAIL_HOST', ''):
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_HOST = os.getenv("EMAIL_HOST", '')
+    EMAIL_PORT = os.getenv("EMAIL_PORT", '')
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", '')
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", '')
+    EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", 'n') == 'y'
 
 # BASE_URL required for notification emails
 BASE_URL = str.format("https://{0}", os.getenv("VIRTUAL_HOST", 'localhost:8000'))
