@@ -31,7 +31,7 @@ ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(';')
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_DEFAULT_SENDER', 'root@localhost')
 
 if os.getenv('EMAIL_HOST', ''):
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.getenv("EMAIL_HOST", '')
     EMAIL_PORT = os.getenv("EMAIL_PORT", '')
     EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", '')
