@@ -54,7 +54,7 @@ kombu==4.6.3
 l18n==2018.5
 libsass==0.19.4
 Markdown==2.6.11
-markdown2==2.3.8
+markdown2==2.4.0
 Misago==0.26.0
 more-itertools==7.1.0
 oauthlib==3.0.2
